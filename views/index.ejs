@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title><%= path %></title>
+        <style type="text/css">
+            body {
+                background:black;
+            }
+            .div {
+                display: inline-block;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Add a placeholder for the Twitch embed -->
+        <div style="text-align: center;">
+        <div class="div" id="twitch-embed"></div>
+        </div>
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <script>
+            //Padding is a percentage, 0% to 100%
+            const PADDING = .05;
+
+            var streams = document.getElementsByTagName("title")[0].innerHTML;
+            console.log(streams);
+            document.title = "MuchTwitch";
+
+            var split = streams.split("/");
+            split.splice(0, 1);
+            if (split[split.length-1] === "") {
+                split.splice(split.length-1, 1);
+            }
+
+            //mode 0 = null
+            //mode 1 = 100% full screen, only 1 stream on
+            //mode 2 = 2 way split screen, only 2 streams on
+            //mode 4 = 4 way split screen, 3+ streams on
+            var mode = 0;
+            if (split.length === 1 || split.length === 2) {
+                mode = split.length;
+            } else {
+                mode = 4;
+            }
+
+            var widthRes = window.innerWidth;
+            var heightRes = window.innerHeight;
+            for (var i = 0; i < split.length; i++) {
+                if (mode === 1) {
+                    new Twitch.Embed("twitch-embed", {
+                        width: (widthRes - (widthRes * PADDING)),
+                        height: (heightRes - (heightRes * PADDING)),
+                        channel: split[i],
+                        theme: "dark",
+                        layout: "video"
+                    });
+                } else if (mode === 2){
+                    new Twitch.Embed("twitch-embed", {
+                        width: (widthRes - (widthRes * PADDING))/2,
+                        height: (heightRes - (heightRes * PADDING)),
+                        channel: split[i],
+                        theme: "dark",
+                        layout: "video"
+                    });
+                } else if (mode === 4) {
+                    new Twitch.Embed("twitch-embed", {
+                        width: (widthRes - (widthRes * PADDING))/2,
+                        height: (heightRes - (heightRes * PADDING))/2,
+                        channel: split[i],
+                        theme: "dark",
+                        layout: "video"
+                });
+                }
+                console.log("i = " + i + " split[i] = " + split[i]);
+            }
+
+            
+            window.addEventListener("resize", function() {
+                console.log("width = " + window.innerWidth);
+                console.log("height = " + window.innerHeight);
+            });
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,23 @@
+{
+  "name": "twitchapp",
+  "version": "1.0.0",
+  "description": "View multiple twitch streams all in one webpage.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alveeno/twitchViewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alveeno/twitchViewer/issues"
+  },
+  "homepage": "https://github.com/alveeno/twitchViewer#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
