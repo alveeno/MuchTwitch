@@ -1,6 +1,6 @@
 # twitchViewer
 View multiple twitch streams all in one webpage.
 
-# authors
+# Collaborators
 Codie Bryan
 Alvin Nguyen
